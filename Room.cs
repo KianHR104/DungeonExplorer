@@ -18,7 +18,11 @@ namespace DungeonExplorer
             Enemy_Count = enemy_count;
             Item = item;
         }
-        // allows player to read description of room 
+
+        /// <summary>
+        /// Allows the user to know the description of the room.
+        /// </summary>
+        /// <returns> Returns a description of the current room. </returns>
         public string GetDescription()
         {
             return Description;

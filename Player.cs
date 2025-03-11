@@ -15,9 +15,12 @@ namespace DungeonExplorer
             Name = name;
             Health = health;
         }
+
+        /// <summary>
+        /// tell the player they found a item, what it is and put it in inventory
+        /// </summary>
         public void PickUpItem(string item)
         {
-            // tell the player they found a item, what it is and put it in inventory
             Console.WriteLine("You find an item:");
             Console.WriteLine(item);
             inventory.Add(item);
