@@ -19,11 +19,11 @@ namespace DungeonExplorer
         /// <summary>
         /// tell the player they found a item, what it is and put it in inventory
         /// </summary>
-        public void PickUpItem(string item)
+        public void PickUpItem(List<string> items)
         {
             Console.WriteLine("You find an item:");
-            Console.WriteLine(item);
-            inventory.Add(item);
+            Console.WriteLine(string.Join(", ", items));
+            inventory.AddRange(items);
         }
     }
 }

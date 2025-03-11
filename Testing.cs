@@ -10,9 +10,9 @@ namespace DungeonExplorer
         /// Something testing?
         /// </summary>
         /// <returns> Something. </returns>
-        public void CheckSomething()
+        public void CheckInventory()
         {
-            //return something;
+            Debug.Assert(Items.Count > 0, "Inventory should not be empty!");
         }
     }
 }

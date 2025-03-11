@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Media;
+using System.Collections.Generic;
 
 namespace DungeonExplorer
 {
@@ -11,7 +12,8 @@ namespace DungeonExplorer
         {
             // Initialize the game with one room and one player.
             player = new Player("The Selected Souless", 100);
-            currentRoom = new Room("The Flameconnected church", "It's an crumbling ruin situated to overlook a cliff, which appears to be inhabbited by a distant town with tall stone walls encasing it. In the centre of these ruins lies a dying tree next to a blade sticking out a campfire.", 0, "Starter Pendant");
+            //currentRoom = new Room("The Flameconnected church", "It's an crumbling ruin situated to overlook a cliff, which appears to be inhabbited by a distant town with tall stone walls encasing it. In the centre of these ruins lies a dying tree next to a blade sticking out a campfire.", 0, "Starter Pendant");
+            currentRoom = new Room("The", "it dark", 0, new List<string>{"Dagger", "Sword", "Bow"});
         }
         /// <summary>
         /// Initializes the game.
@@ -24,21 +26,21 @@ namespace DungeonExplorer
                 Console.Clear(); // clears screen so easier for user
                 Console.WriteLine($"You are in: {currentRoom.Name}"); // tell the user what room they are in.
                 // Checks if enemies are in the room by seeing the enemy count, if so start a fight.
-                if (currentRoom.Enemy_Count >= 1)
+                if (currentRoom.EnemyCount >= 1)
                     {
                         Console.WriteLine("There are enemies in this room starting fight...");
                         // write code for comabt system... v
                         
                         // Ensure when player clears a room of enemies they dont respawn
-                        currentRoom.Enemy_Count = 0;
+                        currentRoom.EnemyCount = 0;
                     }
 
                 // checks if the room had an item
-                if (!string.IsNullOrEmpty(currentRoom.Item))
+                if (currentRoom.Items != null && currentRoom.Items.Count > 0)
                     {
-                        player.PickUpItem(currentRoom.Item);
+                        player.PickUpItem(currentRoom.Items);
                         // Empties the item incase player reloads this room
-                        currentRoom.Item = "" ;
+                        currentRoom.Items.Clear();
                         Console.ReadKey();
                         Console.WriteLine("");
                     }
