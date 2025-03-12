@@ -12,8 +12,10 @@ namespace DungeonExplorer
         {
             // Initialize the game with one room and one player.
             player = new Player("The Selected Souless", 100);
-            //currentRoom = new Room("The Flameconnected church", "It's an crumbling ruin situated to overlook a cliff, which appears to be inhabbited by a distant town with tall stone walls encasing it. In the centre of these ruins lies a dying tree next to a blade sticking out a campfire.", 0, "Starter Pendant");
-            currentRoom = new Room("The", "it dark", 0, new List<string>{"Dagger", "Sword", "Bow"});
+            currentRoom = new Room("Flameconnected church", "It's an crumbling ruin situated to overlook a cliff.", 0, new List<string>{"Useless Pendant", "Zweihander", "Binoculars"});
+            SecondRoom = new Room("Souless village", "It's a decrepit, wooden housing district.", 3, new List<string>{"Residence Key", "Unending Box"});
+            ThirdRoom = new Room("Souless Communion", "It's a ruined cathedral district overrun by the Souless.", 5, new List<string>{"Titan Chunk", "Mystery Key"});
+            FourthRoom = new Room("First Chime of arising", "It's a gothic rooftop with 2 stone chimera.", 2, new List<string>{"The Chimera Halberd", "Chimera Tail Axe"});
         }
         /// <summary>
         /// Initializes the game.

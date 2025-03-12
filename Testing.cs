@@ -7,9 +7,8 @@ namespace DungeonExplorer
     public class Testing
     {
         /// <summary>
-        /// Something testing?
+        /// Checks if the inventory is empty.
         /// </summary>
-        /// <returns> Something. </returns>
         public void CheckInventory()
         {
             Debug.Assert(Items.Count > 0, "Inventory should not be empty!");
