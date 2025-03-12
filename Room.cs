@@ -6,7 +6,7 @@ namespace DungeonExplorer
 {
 public class Room
 {
-    public string Name { get; set; }
+    private string Name { get; set; }
     private string Description { get; set; }
     public int EnemyCount { get; set; }
     public List<string> Items { get; set; }  
@@ -27,6 +27,15 @@ public class Room
         public string GetDescription()
         {
             return Description;
+        }
+
+        /// <summary>
+        /// Allows the user to know the name of the room.
+        /// </summary>
+        /// <returns> Returns a name of the current room. </returns>
+        public string GetRoomName()
+        {
+            return Name;
         }
     }
 }

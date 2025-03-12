@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Media;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace DungeonExplorer
@@ -8,12 +9,14 @@ namespace DungeonExplorer
     {
         int RoomIndex = 0;
         private Player player;
-        private List<Room> CurrentRoom;
+        private List<Room> RoomList;
         public Game()
         {
-            // Initialize the game with one room and one player.
-            player = new Player("The Selected Souless", 100);
-            CurrentRoom = new List<Room>
+            // Allowes user to pick their own name
+            Console.Write("Please enter the name of your hero:  ");
+            string username = Console.ReadLine(); 
+            player = new Player(username, 100);
+            RoomList = new List<Room>
             {
             new Room("Flameconnected church", "It's an crumbling ruin situated to overlook a cliff.", 0, new List<string>{"Useless Pendant", "Zweihander", "Binoculars"}),
             new Room("Souless village", "It's a decrepit, wooden housing district.", 3, new List<string>{"Residence Key", "Unending Box"}),
@@ -30,25 +33,24 @@ namespace DungeonExplorer
             while (playing)
             {
                 Console.Clear(); // clears screen so easier for user
-                Console.WriteLine($"You are in: {CurrentRoom[RoomIndex].Name}"); // tell the user what room they are in.
+                Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}"); // tell the user what room they are in.
                 // Checks if enemies are in the room by seeing the enemy count, if so start a fight.
-                if (CurrentRoom[RoomIndex].EnemyCount >= 1)
+                if (RoomList[RoomIndex].EnemyCount >= 1)
                     {
-                        Console.WriteLine("There are enemies in this room starting fight...");
+                        Console.WriteLine("There are enemies in this room, starting fight...");
                         // write code for comabt system... v
                         
                         // Ensure when player clears a room of enemies they dont respawn
-                        CurrentRoom[RoomIndex].EnemyCount = 0;
+                        //RoomList[RoomIndex].EnemyCount = 0;
                     }
 
                 // checks if the room had an item
-                if (CurrentRoom[RoomIndex].Items != null && CurrentRoom[RoomIndex].Items.Count > 0)
+                if (RoomList[RoomIndex].Items != null && RoomList[RoomIndex].Items.Count > 0)
                     {
-                        player.PickUpItem(CurrentRoom[RoomIndex].Items);
+                        player.PickUpItem(RoomList[RoomIndex].Items);
                         // Empties the item incase player reloads this room
-                        CurrentRoom[RoomIndex].Items.Clear();
-                        Console.ReadKey();
-                        Console.WriteLine("");
+                        RoomList[RoomIndex].Items.Clear();
+                        Thread.Sleep(1000);
                     }
 
                 // The options the player has once defeating the enemies and looting the room.
@@ -63,24 +65,27 @@ namespace DungeonExplorer
                     case "1":
                         // lets the player check room description
                         Console.Clear();
-                        Console.WriteLine(CurrentRoom[RoomIndex].GetDescription());
+                        Console.WriteLine(RoomList[RoomIndex].GetDescription());
                         //Takes player to next room if there is a room available. 
-                        if (RoomIndex >= 0 && RoomIndex < CurrentRoom.Count - 1)
+                        if (RoomIndex >= 0 && RoomIndex < RoomList.Count - 1)
+                        {
+                            Console.WriteLine("Entering Next Room....");
                             RoomIndex += 1;
+                        }
                         else
-                            {
-                                Console.WriteLine("No more rooms.");
-                            }
+                        {
+                            Console.WriteLine("No more rooms.");
+                        }
+                        Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;
                     case "2":
                         // lets the player check player status
                         Console.Clear();
-                        Console.WriteLine("player Name:");
-                        Console.WriteLine(player.Name);                        
-                        Console.WriteLine("player Health:");                        
-                        Console.WriteLine(player.Health);
+                        Console.WriteLine($"Player Name: {player.Name}");
+                        Console.WriteLine($"Player Health: {player.Health}");
                         Console.WriteLine("Inventory: " + string.Join(", ", player.inventory));
+                        Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;
 
@@ -93,7 +98,7 @@ namespace DungeonExplorer
                     default:
                         // if player doesnt choose a valid option
                         Console.WriteLine("Invalid choice. Try again.");
-                        Console.ReadKey();
+                        Thread.Sleep(2000);
                         break;
                 }
             }

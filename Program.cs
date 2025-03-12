@@ -13,10 +13,10 @@ namespace DungeonExplorer
         /// </summary>
         static void Main(string[] args)
         {
-            Game game = new Game();
             Console.WriteLine("Press any button to start");
             Console.ReadKey();
             Console.Clear();
+            Game game = new Game();
             game.Start();
             Console.WriteLine("Waiting for your Implementation");
         }
