@@ -18,10 +18,35 @@ namespace DungeonExplorer
             player = new Player(username, 100);
             RoomList = new List<Room>
             {
-            new Room("Flameconnected church", "It's an crumbling ruin situated to overlook a cliff.", 0, new List<string>{"Useless Pendant", "Zweihander", "Binoculars"}),
-            new Room("Souless village", "It's a decrepit, wooden housing district.", 3, new List<string>{"Residence Key", "Unending Box"}),
-            new Room("Souless Communion", "It's a ruined cathedral district overrun by the Souless.", 5, new List<string>{"Titan Chunk", "Mystery Key"}),
-            new Room("First Chime of arising", "It's a gothic rooftop with 2 stone chimera.", 2, new List<string>{"The Chimera Halberd", "Chimera Tail Axe"})
+            new Room(
+                "Flameconnected church", 
+                "It's an crumbling ruin situated to overlook a cliff.", 
+                0, 
+                new List<string>{
+                    "Useless Pendant", 
+                    "Zweihander", 
+                    "Binoculars"}),
+
+            new Room("Souless village", 
+            "It's a decrepit, wooden housing district.", 
+            3, 
+            new List<string>{
+                "Residence Key", 
+                "Unending Box"}),
+
+            new Room("Souless Communion", 
+            "It's a ruined cathedral district overrun by the Souless.", 
+            5, 
+            new List<string>{
+                "Titan Chunk", 
+                "Mystery Key"}),
+
+            new Room("First Chime of arising", 
+            "It's a gothic rooftop with 2 stone chimera.", 
+            2, 
+            new List<string>{
+                "The Chimera Halberd", 
+                "Chimera Tail Axe"})
             };
         }
         /// <summary>
@@ -41,7 +66,7 @@ namespace DungeonExplorer
                         // write code for comabt system... v
                         
                         // Ensure when player clears a room of enemies they dont respawn
-                        //RoomList[RoomIndex].EnemyCount = 0;
+                        RoomList[RoomIndex].EnemyCount = 0;
                     }
 
                 // checks if the room had an item
@@ -84,7 +109,7 @@ namespace DungeonExplorer
                         Console.Clear();
                         Console.WriteLine($"Player Name: {player.Name}");
                         Console.WriteLine($"Player Health: {player.Health}");
-                        Console.WriteLine("Inventory: " + string.Join(", ", player.inventory));
+                        Console.WriteLine($"Inventory: {string.Join(", ", player.inventory)}");
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;
