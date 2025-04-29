@@ -10,12 +10,13 @@ namespace DungeonExplorer
         int RoomIndex = 0;
         private Player player;
         private List<Room> RoomList;
+        private Dictionary<int, List<Enemy>> EnemyList;
         public Game()
         {
             // Allowes user to pick their own name
             Console.Write("Please enter the name of your hero:  ");
             string username = Console.ReadLine(); 
-            player = new Player(username, 100);
+            player = new Player(username, 100, 25);
             RoomList = new List<Room>
             {
             new Room(1,
@@ -47,6 +48,15 @@ namespace DungeonExplorer
                 "The Chimera Halberd", 
                 "Chimera Tail Axe"})
             };
+
+            // Creates a list of enemies which relate to each room.
+            EnemyList = new Dictionary<int, List<Enemy>>()
+            {
+                { 1, new List<Enemy> {} },
+                { 2, new List<Enemy> {new Enemy("Horde of Souless", 30, 5), new Enemy("Souless Warrior", 50, 10)}},
+                { 3, new List<Enemy> {new Enemy("Armored Boar", 150, 10) } },
+                { 4, new List<Enemy> {new Enemy("Chimera", 100, 20), new Enemy("Chimera 2", 50, 20)}}
+            };
         }
         /// <summary>
         /// Initializes the game.
@@ -56,18 +66,18 @@ namespace DungeonExplorer
             bool playing = true;
             while (playing)
             {
-                Console.Clear(); // clears screen so easier for user
-                Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}"); // tell the user what room they are in.
-                // Checks if enemies are in the room by seeing the enemy count, if so start a fight.
-                /*
-                if (RoomList[RoomIndex].EnemyCount >= 1)
-                    {
-                        Console.WriteLine("There are enemies in this room, starting fight...");
-                        // write code for comabt system... v
-                        
-                        // Ensure when player clears a room of enemies they dont respawn
-                        RoomList[RoomIndex].EnemyCount = 0;
-                    }
+                // clears screen so easier for user
+                Console.Clear(); 
+                // tell the user what room they are in.
+                Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}");
+
+                // Checks if enemies are in the room by comparing the room id to the Enemy list dictionary
+                if (EnemyList.ContainsKey(RoomList[RoomIndex].Id) && EnemyList[RoomList[RoomIndex].Id].Count > 0)
+                {
+                    Console.WriteLine("There are enenmies");
+                    
+                    EnemyList[RoomList[RoomIndex].Id].Clear();
+                }
 
                 // checks if the room had an item
                 if (RoomList[RoomIndex].Items != null && RoomList[RoomIndex].Items.Count > 0)
@@ -77,7 +87,6 @@ namespace DungeonExplorer
                         RoomList[RoomIndex].Items.Clear();
                         Thread.Sleep(1000);
                     }
-                */
 
                 // The options the player has once defeating the enemies and looting the room.
                 Console.WriteLine("What would you like to do?");
