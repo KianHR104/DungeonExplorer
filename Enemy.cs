@@ -8,7 +8,7 @@ namespace DungeonExplorer
         public Enemy(string name, int health, int damage) : base(name, health, damage) {}
 
         // Decision method returns a string action
-        public virtual string DecideAction(Player player)
+        public virtual string EnemyDecision(Player player)
         {
             int roll = random.Next(100);
             if (roll < 5) return "Flee";
@@ -22,10 +22,10 @@ namespace DungeonExplorer
     {
         public HordeofSouless() : base("Horde of Souless", 26, 5) {}
 
-        public override string DecideAction(Player player)
+        public override string EnemyDecision(Player player)
         {
             if (Health < 10) return "Flee";
-            return base.DecideAction(player);
+            return base.EnemyDecision(player);
         }
     }
 
@@ -35,7 +35,7 @@ namespace DungeonExplorer
 
         public SoulessWarrior() : base("Souless Warrior", 50, 10) {}
 
-        public override string DecideAction(Player player)
+        public override string EnemyDecision(Player player)
         {
             if (!hasBlocked)
             {
@@ -50,7 +50,7 @@ namespace DungeonExplorer
     {
         public ArmoredBoar() : base("Armored Boar", 75, 10) {}
 
-        public override string DecideAction(Player player)
+        public override string EnemyDecision(Player player)
         {
             return "Attack";
         }

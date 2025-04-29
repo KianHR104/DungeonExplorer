@@ -86,6 +86,7 @@ namespace DungeonExplorer
                         Console.Clear();
                         Console.WriteLine($"Player Name: {player.Name}");
                         Console.WriteLine($"Player Health: {player.Health}");
+                        Console.WriteLine($"Player Damage: {player.Damage}");
                         Console.WriteLine($"Inventory: {string.Join(", ", player.inventory)}");
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();

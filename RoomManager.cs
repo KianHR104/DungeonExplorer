@@ -7,9 +7,10 @@ namespace DungeonExplorer
         /// <summary>
         /// Creates all the required rooms and their info.
         /// </summary>
+        /// <returns> Returns the list of rooms. </returns>
         public static List<Room> GetRooms()
         {
-                var room1 = new Room(1,
+                var FirstRoom = new Room(1,
                     "Flameconnected church", 
                     "It's a crumbling ruin situated to overlook a cliff.", 
                     new List<string>{
@@ -19,7 +20,7 @@ namespace DungeonExplorer
                     new Dictionary<string, int> { 
                         { "east", 2 }});
 
-                var room2 = new Room(2,
+                var SecondRoom = new Room(2,
                     "Souless village", 
                     "It's a decrepit, wooden housing district.", 
                     new List<string>{
@@ -28,7 +29,7 @@ namespace DungeonExplorer
                     new Dictionary<string, int> { 
                         { "east", 3 }, { "west", 1 }});
 
-                var room3 = new Room(3,
+                var ThirdRoom = new Room(3,
                     "Souless Communion", 
                     "It's a ruined cathedral district overrun by the Souless.", 
                     new List<string>{
@@ -37,7 +38,7 @@ namespace DungeonExplorer
                     new Dictionary<string, int> { 
                         { "east", 4 }, { "west", 2 }});
 
-                var room4 = new Room(4,
+                var FourthRoom = new Room(4,
                     "First Chime of arising", 
                     "It's a gothic rooftop with 2 stone chimera.", 
                     new List<string>{
@@ -46,13 +47,14 @@ namespace DungeonExplorer
                     new Dictionary<string, int> { 
                         { "west", 3 }});
 
-                var rooms = new List<Room> { room1, room2, room3, room4 };
+                var rooms = new List<Room> { FirstRoom, SecondRoom, ThirdRoom, FourthRoom };
                 return rooms;
         }
 
         /// <summary>
-        /// Creates all the required enemies and their info and where they are.
+        /// Creates all the requird enemies and their info and where they are.
         /// </summary>
+        /// <returns> the list of enenmies locations. </returns>
         public static Dictionary<int, List<Enemy>> GetEnemies()
         {
             return new Dictionary<int, List<Enemy>>

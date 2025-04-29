@@ -51,7 +51,7 @@ namespace DungeonExplorer
             // checks if there any directions at all (there should always be atleast 1)
             if (Directions.Count == 0)
             {
-                return "Error No directions available.";
+                return "this shoudnt be happening.";
             }
 
             var directionText = new List<string>();
