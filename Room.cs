@@ -9,24 +9,28 @@ namespace DungeonExplorer
         public int RoomId { get; set; }
         private string Name { get; set; }
         private string Description { get; set; }
-        public List<string> Items { get; set; }  
-
-        // Constructor should accept List<string> for items
-        public Room(int id, string name, string description, List<string> items)
+        public List<string> Items { get; set; }
+        public Dictionary<string, int> Directions { get; set; }
+        public Room(int id, string name, string description, 
+                    List<string> items,  
+                    Dictionary<string, int> directions = null)
         {
             RoomId = id;
             Name = name;
             Description = description;
             Items = items ?? new List<string>(); // Ensures Items is never null
+            Directions = directions ?? new Dictionary<string, int>();
         }
 
         /// <summary>
         /// Allows the user to know the description of the room.
         /// </summary>
-        /// <returns> Returns a description of the current room. </returns>
-        public string GetDescription()
+        public void GetDescription()
         {
-            return Description;
+            Console.WriteLine($"Room: {Name}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Directions: {GetDirections()}");
+            Console.WriteLine(); 
         }
 
         /// <summary>
@@ -36,6 +40,27 @@ namespace DungeonExplorer
         public string GetRoomName()
         {
             return Name;
+        }
+        
+        /// <summary>
+        /// gets the directions where a room is placed in relation to the room which is currently player in
+        /// </summary>
+        /// <returns> everywhere where the player can pick. </returns>
+        public string GetDirections()
+        {
+            // checks if there any directions at all (there should always be atleast 1)
+            if (Directions.Count == 0)
+            {
+                return "Error No directions available.";
+            }
+
+            var directionText = new List<string>();
+            foreach (var direction in Directions)
+            {
+                directionText.Add($"{direction.Key} leads to room {direction.Value}");
+            }
+
+            return string.Join(", ", directionText);
         }
     }
 }

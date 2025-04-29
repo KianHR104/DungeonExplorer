@@ -18,10 +18,12 @@ namespace DungeonExplorer
             string username = Console.ReadLine(); 
             player = new Player(username, 100, 25);
 
+            // Creates a list of rooms amd their info.
             RoomList = RoomManager.GetRooms();
 
             // Creates a list of enemies which relate to each room.
             EnemyList = RoomManager.GetEnemies();
+
         }
         /// <summary>
         /// Initializes the game.
@@ -65,7 +67,7 @@ namespace DungeonExplorer
                     case "1":
                         // lets the player check room description
                         Console.Clear();
-                        Console.WriteLine(RoomList[RoomIndex].GetDescription());
+                        RoomList[RoomIndex].GetDescription();
                         //Takes player to next room if there is a room available. 
                         if (RoomIndex >= 0 && RoomIndex < RoomList.Count - 1)
                         {
