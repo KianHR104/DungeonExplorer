@@ -18,32 +18,31 @@ namespace DungeonExplorer
             player = new Player(username, 100);
             RoomList = new List<Room>
             {
-            new Room(
+            new Room(1,
                 "Flameconnected church", 
                 "It's an crumbling ruin situated to overlook a cliff.", 
-                0, 
                 new List<string>{
                     "Useless Pendant", 
                     "Zweihander", 
                     "Binoculars"}),
 
-            new Room("Souless village", 
+            new Room(2,
+            "Souless village", 
             "It's a decrepit, wooden housing district.", 
-            3, 
             new List<string>{
                 "Residence Key", 
                 "Unending Box"}),
 
-            new Room("Souless Communion", 
+            new Room(3,
+            "Souless Communion", 
             "It's a ruined cathedral district overrun by the Souless.", 
-            5, 
             new List<string>{
                 "Titan Chunk", 
                 "Mystery Key"}),
 
-            new Room("First Chime of arising", 
+            new Room(4,
+            "First Chime of arising", 
             "It's a gothic rooftop with 2 stone chimera.", 
-            2, 
             new List<string>{
                 "The Chimera Halberd", 
                 "Chimera Tail Axe"})
@@ -60,6 +59,7 @@ namespace DungeonExplorer
                 Console.Clear(); // clears screen so easier for user
                 Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}"); // tell the user what room they are in.
                 // Checks if enemies are in the room by seeing the enemy count, if so start a fight.
+                /*
                 if (RoomList[RoomIndex].EnemyCount >= 1)
                     {
                         Console.WriteLine("There are enemies in this room, starting fight...");
@@ -77,6 +77,7 @@ namespace DungeonExplorer
                         RoomList[RoomIndex].Items.Clear();
                         Thread.Sleep(1000);
                     }
+                */
 
                 // The options the player has once defeating the enemies and looting the room.
                 Console.WriteLine("What would you like to do?");

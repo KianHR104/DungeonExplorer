@@ -1,23 +1,16 @@
-﻿using System;
-using System.Media;
+using System;
 using System.Collections.Generic;
 
 namespace DungeonExplorer
 {
-    public class Player
+    public class Player : Character
     {
-        public string Name { get; private set; }
-        public int Health { get; private set; }
-        public List<string> inventory = new List<string>();
-
-        public Player(string name, int health) 
+        public Player(string name, int health) : base(name, health) 
         {
-            Name = name;
-            Health = health;
         }
 
         /// <summary>
-        /// tell the player they found a item, what it is and put it in inventory
+        /// Tell the player they found an item, what it is, and put it in inventory
         /// </summary>
         public void PickUpItem(List<string> items)
         {
