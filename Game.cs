@@ -17,46 +17,11 @@ namespace DungeonExplorer
             Console.Write("Please enter the name of your hero:  ");
             string username = Console.ReadLine(); 
             player = new Player(username, 100, 25);
-            RoomList = new List<Room>
-            {
-            new Room(1,
-                "Flameconnected church", 
-                "It's an crumbling ruin situated to overlook a cliff.", 
-                new List<string>{
-                    "Useless Pendant", 
-                    "Zweihander", 
-                    "Binoculars"}),
 
-            new Room(2,
-            "Souless village", 
-            "It's a decrepit, wooden housing district.", 
-            new List<string>{
-                "Residence Key", 
-                "Unending Box"}),
-
-            new Room(3,
-            "Souless Communion", 
-            "It's a ruined cathedral district overrun by the Souless.", 
-            new List<string>{
-                "Titan Chunk", 
-                "Mystery Key"}),
-
-            new Room(4,
-            "First Chime of arising", 
-            "It's a gothic rooftop with 2 stone chimera.", 
-            new List<string>{
-                "The Chimera Halberd", 
-                "Chimera Tail Axe"})
-            };
+            RoomList = RoomManager.GetRooms();
 
             // Creates a list of enemies which relate to each room.
-            EnemyList = new Dictionary<int, List<Enemy>>()
-            {
-                { 1, new List<Enemy> {} },
-                { 2, new List<Enemy> {new Enemy("Horde of Souless", 30, 5), new Enemy("Souless Warrior", 50, 10)}},
-                { 3, new List<Enemy> {new Enemy("Armored Boar", 150, 10) } },
-                { 4, new List<Enemy> {new Enemy("Chimera", 100, 20), new Enemy("Chimera 2", 50, 20)}}
-            };
+            EnemyList = RoomManager.GetEnemies();
         }
         /// <summary>
         /// Initializes the game.
@@ -71,12 +36,12 @@ namespace DungeonExplorer
                 // tell the user what room they are in.
                 Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}");
 
-                // Checks if enemies are in the room by comparing the room id to the Enemy list dictionary
-                if (EnemyList.ContainsKey(RoomList[RoomIndex].Id) && EnemyList[RoomList[RoomIndex].Id].Count > 0)
+                // Checks if enemies are in the room by comparing the RoomId to the Enemy list dictionary
+                if (EnemyList.ContainsKey(RoomList[RoomIndex].RoomId) && EnemyList[RoomList[RoomIndex].RoomId].Count > 0)
                 {
                     Console.WriteLine("There are enenmies");
-                    
-                    EnemyList[RoomList[RoomIndex].Id].Clear();
+
+                    EnemyList[RoomList[RoomIndex].RoomId].Clear();
                 }
 
                 // checks if the room had an item

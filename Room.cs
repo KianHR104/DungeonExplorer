@@ -6,7 +6,7 @@ namespace DungeonExplorer
 {
     public class Room
     {
-        public int Id { get; set; }
+        public int RoomId { get; set; }
         private string Name { get; set; }
         private string Description { get; set; }
         public List<string> Items { get; set; }  
@@ -14,7 +14,7 @@ namespace DungeonExplorer
         // Constructor should accept List<string> for items
         public Room(int id, string name, string description, List<string> items)
         {
-            Id = id;
+            RoomId = id;
             Name = name;
             Description = description;
             Items = items ?? new List<string>(); // Ensures Items is never null
