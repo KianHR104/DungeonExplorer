@@ -9,6 +9,7 @@ namespace DungeonExplorer
         public int Health { get; set; }
         public int Damage { get; set; }
         public List<string> inventory = new List<string>();
+        public bool IsAlive => Health > 0;
 
         public Character(string name, int health, int damage) 
         {
@@ -17,15 +18,17 @@ namespace DungeonExplorer
             Damage = damage;
         }
 
-        public void TakeDamage(int damage)
+        public virtual void Attack(Character target)
         {
-            Health -= damage;
-            if (Health < 0) Health = 0; // Prevent health from going below 0
+            Console.WriteLine($"{Name} attacks {target.Name} for {Damage} damage.");
+            target.TakeDamage(Damage);
         }
 
-        public bool IsAlive()
+        public virtual void TakeDamage(int damage)
         {
-            return Health > 0;
+            Health -= damage;
+            if (Health < 0) Health = 0;
+            Console.WriteLine($"{Name} takes {damage} damage. (HP: {Health})");
         }
     }
 }

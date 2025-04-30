@@ -42,6 +42,10 @@ namespace DungeonExplorer
                 if (EnemyList.ContainsKey(RoomList[RoomIndex].RoomId) && EnemyList[RoomList[RoomIndex].RoomId].Count > 0)
                 {
                     Console.WriteLine("There are enenmies");
+                    foreach (var enemy in EnemyList[RoomList[RoomIndex].RoomId])
+                    {
+                        Console.WriteLine($"- {enemy.Name} (HP: {enemy.Health}, ATK: {enemy.Damage})");
+                    }
 
                     EnemyList[RoomList[RoomIndex].RoomId].Clear();
                 }
@@ -71,15 +75,27 @@ namespace DungeonExplorer
                         //Takes player to next room if there is a room available. 
                         if (RoomIndex >= 0 && RoomIndex < RoomList.Count - 1)
                         {
-                            Console.WriteLine("Entering Next Room....");
-                            RoomIndex += 1;
+                            Console.WriteLine("Which Direction would you like to go?");
+                            // gets an input from the users, remvoes white space and lower cases it.
+                            string input = Console.ReadLine()?.Trim().ToLower();
+                            // compare if the current room has the inputed direction avaibale
+                            if (RoomList[RoomIndex].Directions.TryGetValue(input, out int destinationRoomId))
+                            {
+                                // change the room to whatever the player picks
+                                RoomIndex = destinationRoomId; 
+                                Console.WriteLine($"You go {input} to Room {RoomIndex}.");
+                                Console.WriteLine("Loading Next Room......");
+                            }
+                            else
+                            {
+                                Console.WriteLine("You can't go that way. Going Back.....");
+                            }
                         }
                         else
                         {
                             Console.WriteLine("No more rooms.");
                         }
-                        Console.WriteLine("Press any key to continue.");
-                        Console.ReadKey();
+                        Thread.Sleep(2000);
                         break;
                     case "2":
                         // lets the player check player status

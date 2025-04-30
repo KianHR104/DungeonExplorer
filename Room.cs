@@ -27,7 +27,7 @@ namespace DungeonExplorer
         /// </summary>
         public void GetDescription()
         {
-            Console.WriteLine($"Room: {Name}");
+            Console.WriteLine($"Room Name: {Name}");
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Directions: {GetDirections()}");
             Console.WriteLine(); 
@@ -48,18 +48,19 @@ namespace DungeonExplorer
         /// <returns> everywhere where the player can pick. </returns>
         public string GetDirections()
         {
-            // checks if there any directions at all (there should always be atleast 1)
+            // checks if there any directions at all (there should always be atleast 1 the room you came from.)
             if (Directions.Count == 0)
             {
                 return "this shoudnt be happening.";
             }
-
+            // make a list so it all appears on one line.
             var directionText = new List<string>();
+            // check each direction in the list of the room.
             foreach (var direction in Directions)
             {
-                directionText.Add($"{direction.Key} leads to room {direction.Value}");
+                // say which direction leads to a room
+                directionText.Add($"{direction.Key} leads to a room");
             }
-
             return string.Join(", ", directionText);
         }
     }

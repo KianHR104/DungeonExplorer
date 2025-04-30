@@ -10,7 +10,7 @@ namespace DungeonExplorer
         /// <returns> Returns the list of rooms. </returns>
         public static List<Room> GetRooms()
         {
-                var FirstRoom = new Room(1,
+                var FirstRoom = new Room(0,
                     "Flameconnected church", 
                     "It's a crumbling ruin situated to overlook a cliff.", 
                     new List<string>{
@@ -18,34 +18,34 @@ namespace DungeonExplorer
                         "Zweihander", 
                         "Binoculars"},
                     new Dictionary<string, int> { 
-                        { "east", 2 }});
+                        { "east", 1 }});
 
-                var SecondRoom = new Room(2,
+                var SecondRoom = new Room(1,
                     "Souless village", 
                     "It's a decrepit, wooden housing district.", 
                     new List<string>{
                         "Residence Key", 
                         "Unending Box"},
                     new Dictionary<string, int> { 
-                        { "east", 3 }, { "west", 1 }});
+                        { "east", 2 }, { "west", 0 }});
 
-                var ThirdRoom = new Room(3,
+                var ThirdRoom = new Room(2,
                     "Souless Communion", 
                     "It's a ruined cathedral district overrun by the Souless.", 
                     new List<string>{
                         "Titan Chunk", 
                         "Mystery Key"},
                     new Dictionary<string, int> { 
-                        { "east", 4 }, { "west", 2 }});
+                        { "east", 3 }, { "west", 1 }});
 
-                var FourthRoom = new Room(4,
+                var FourthRoom = new Room(3,
                     "First Chime of arising", 
                     "It's a gothic rooftop with 2 stone chimera.", 
                     new List<string>{
                         "The Chimera Halberd", 
                         "Chimera Tail Axe"},
                     new Dictionary<string, int> { 
-                        { "west", 3 }});
+                        { "west", 2 }});
 
                 var rooms = new List<Room> { FirstRoom, SecondRoom, ThirdRoom, FourthRoom };
                 return rooms;
@@ -59,10 +59,10 @@ namespace DungeonExplorer
         {
             return new Dictionary<int, List<Enemy>>
             {
-                { 1, new List<Enemy> {} },
-                { 2, new List<Enemy> {new HordeofSouless(), new SoulessWarrior()}},
-                { 3, new List<Enemy> {new ArmoredBoar()}},
-                { 4, new List<Enemy> {new Enemy("Chimera", 100, 20)}}
+                { 0, new List<Enemy> {} },
+                { 1, new List<Enemy> {new HordeofSouless(), new SoulessWarrior()}},
+                { 2, new List<Enemy> {new ArmoredBoar()}},
+                { 3, new List<Enemy> {new Chimera()}}
             };
         }
     }
