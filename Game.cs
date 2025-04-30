@@ -31,6 +31,7 @@ namespace DungeonExplorer
         public void Start()
         {
             bool playing = true;
+            bool PlayerState = true;
             while (playing)
             {
                 // clears screen so easier for user
@@ -48,7 +49,12 @@ namespace DungeonExplorer
                     Console.WriteLine("There are enemies!");
                     BattleManager battleManager = new BattleManager(player, currentRoomEnemies);
                     // Start the battle
-                    battleManager.StartBattle();
+                    PlayerState = battleManager.StartBattle();
+                    if (PlayerState == false)
+                    {
+                        playing = false;
+                        break;
+                    }
                 }
                 else
                 {
@@ -126,6 +132,7 @@ namespace DungeonExplorer
                         break;
                 }
             }
+            Console.WriteLine("Game over, aint no retries.");
         }
     }
 }

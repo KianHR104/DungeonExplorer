@@ -10,6 +10,79 @@ namespace DungeonExplorer
         }
 
         /// <summary>
+        /// lets player decide what to do
+        /// </summary>
+        /// <returns> what the player is going to do </returns>
+        public virtual string PlayerDecision()
+        {
+            while(true)
+            {
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine("1. Attack.");
+                Console.WriteLine("2. Defend");
+                Console.WriteLine("3. Inventory");
+                // Gets the input by the player
+                string choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        return "Attack"; 
+                    case "2":
+                        return "Defend"; 
+                    case "3":
+                        return "Inventory"; 
+                    default:
+                        Console.WriteLine("Please pick from the options.");
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// this is the attack for the player, which allows targeting.
+        /// </summary>
+        public void Attack(List<Enemies> targets)
+        {
+            // repeats until player input valid input
+            while (true)
+            {
+                // Display available targets
+                Console.WriteLine("Select a target to attack:");
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {targets[i].Name}");
+                }
+
+                // get player input
+                string input = Console.ReadLine();
+                // try to turn it into int, if not it does the else.
+                if (int.TryParse(input, out int choice))
+                {
+                    choice -= 1; 
+                    // checks if the choice matchs with an alive charater.
+                    if (choice >= 0 && choice < targets.Count)
+                    {
+                        Character target = targets[choice];
+                        Console.WriteLine($"{Name} attacks {target.Name} for {Damage}.");
+                        target.TakeDamage(Damage);
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("thats not a character.");
+                }
+            }
+        }
+        /// <summary>
+        /// lets player use inventory in combat.
+        /// </summary>
+        public void Inventory()
+        {
+            Console.WriteLine("Inventory");
+        }
+        
+        /// <summary>
         /// Tell the player they found an item, what it is, and put it in inventory
         /// </summary>
         public void PickUpItem(List<string> items)

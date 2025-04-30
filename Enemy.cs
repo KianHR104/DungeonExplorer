@@ -7,7 +7,10 @@ namespace DungeonExplorer
         protected Random random = new Random();
         public Enemies(string name, int health, int damage) : base(name, health, damage) {}
 
-        // Decision method returns a string action
+        /// <summary>
+        /// the "AI" of the enemies
+        /// </summary>
+        /// <returns> what the enemy is going to do </returns>
         public virtual string EnemyDecision()
         {
             int AttackRoll = random.Next(100);
@@ -43,7 +46,7 @@ namespace DungeonExplorer
         /// Health: 50
         /// Damage: 10
         /// </summary>
-        public SoulessWarrior() : base("Souless Warrior", 50, 10) {}
+        public SoulessWarrior() : base("Souless Warrior", 50, 100) {}
         // if the enemy didnt block last turn it will block this turn.
         public override string EnemyDecision()
         {
@@ -52,6 +55,7 @@ namespace DungeonExplorer
                 hasBlocked = true;
                 return "Block";
             }
+            hasBlocked = false;
             return "Attack";
         }
     }
