@@ -2,13 +2,13 @@ using System;
 
 namespace DungeonExplorer
 {
-    public class Enemy : Character
+    public class Enemies : Character
     {
         protected Random random = new Random();
-        public Enemy(string name, int health, int damage) : base(name, health, damage) {}
+        public Enemies(string name, int health, int damage) : base(name, health, damage) {}
 
         // Decision method returns a string action
-        public virtual string EnemyDecision(Player player)
+        public virtual string EnemyDecision()
         {
             int AttackRoll = random.Next(100);
             if (AttackRoll < 5) return "Flee";
@@ -19,7 +19,7 @@ namespace DungeonExplorer
     }
     
     // enemy stats =====================================
-    public class HordeofSouless : Enemy
+    public class HordeofSouless : Enemies
     {
         /// <summary>
         /// Name: "Horde of Souless" 
@@ -28,14 +28,14 @@ namespace DungeonExplorer
         /// </summary>
         public HordeofSouless() : base("Horde of Souless", 26, 5) {}
         // If the enemy has less than 5 hp it runs away.
-        public override string EnemyDecision(Player player)
+        public override string EnemyDecision()
         {
             if (Health < 5) return "Flee";
-            return base.EnemyDecision(player);
+            return base.EnemyDecision();
         }
     }
 
-    public class SoulessWarrior : Enemy
+    public class SoulessWarrior : Enemies
     {
         private bool hasBlocked = false;
         /// <summary>
@@ -45,7 +45,7 @@ namespace DungeonExplorer
         /// </summary>
         public SoulessWarrior() : base("Souless Warrior", 50, 10) {}
         // if the enemy didnt block last turn it will block this turn.
-        public override string EnemyDecision(Player player)
+        public override string EnemyDecision()
         {
             if (!hasBlocked)
             {
@@ -56,7 +56,7 @@ namespace DungeonExplorer
         }
     }
 
-    public class ArmoredBoar : Enemy
+    public class ArmoredBoar : Enemies
     {
         /// <summary>
         /// Name: "Armored Boar"
@@ -65,13 +65,13 @@ namespace DungeonExplorer
         /// </summary>
         public ArmoredBoar() : base("Armored Boar", 75, 10) {}
         // this enemy ONLY attacks.
-        public override string EnemyDecision(Player player)
+        public override string EnemyDecision()
         {
             return "Attack";
         }
     }
 
-    public class Chimera : Enemy
+    public class Chimera : Enemies
     {
         /// <summary>
         /// Name: "Chimera" 
@@ -80,9 +80,9 @@ namespace DungeonExplorer
         /// </summary>
         public Chimera() : base("Chimera", 100, 20) {}
         // when the enemy hits 50% it summons a second chimera (not implemented)
-        public override string EnemyDecision(Player player)
+        public override string EnemyDecision()
         {
-            return base.EnemyDecision(player);
+            return base.EnemyDecision();
         }
     }
 }

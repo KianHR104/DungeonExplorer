@@ -55,14 +55,14 @@ namespace DungeonExplorer
         /// Creates all the requird enemies and their info and where they are.
         /// </summary>
         /// <returns> the list of enenmies locations. </returns>
-        public static Dictionary<int, List<Enemy>> GetEnemies()
+        public static Dictionary<int, List<Enemies>> GetEnemies()
         {
-            return new Dictionary<int, List<Enemy>>
+            return new Dictionary<int, List<Enemies>>
             {
-                { 0, new List<Enemy> {} },
-                { 1, new List<Enemy> {new HordeofSouless(), new SoulessWarrior()}},
-                { 2, new List<Enemy> {new ArmoredBoar()}},
-                { 3, new List<Enemy> {new Chimera()}}
+                { 0, new List<Enemies> {} },
+                { 1, new List<Enemies> {new HordeofSouless(), new SoulessWarrior()}},
+                { 2, new List<Enemies> {new ArmoredBoar()}},
+                { 3, new List<Enemies> {new Chimera()}}
             };
         }
     }

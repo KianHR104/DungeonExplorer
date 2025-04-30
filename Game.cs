@@ -10,7 +10,7 @@ namespace DungeonExplorer
         int RoomIndex = 0;
         private Player player;
         private List<Room> RoomList;
-        private Dictionary<int, List<Enemy>> EnemyList;
+        private Dictionary<int, List<Enemies>> EnemyList;
         public Game()
         {
             // Allowes user to pick their own name
@@ -38,18 +38,23 @@ namespace DungeonExplorer
                 // tell the user what room they are in.
                 Console.WriteLine($"You are in: {RoomList[RoomIndex].GetRoomName()}");
 
-                // Checks if enemies are in the room by comparing the RoomId to the Enemy list dictionary
-                if (EnemyList.ContainsKey(RoomList[RoomIndex].RoomId) && EnemyList[RoomList[RoomIndex].RoomId].Count > 0)
+                // takes just the enemies from this room from the diciotrany, if no enemies make empty list.
+                List<Enemies> currentRoomEnemies = EnemyList.ContainsKey(RoomList[RoomIndex].RoomId) 
+                                                    ? EnemyList[RoomList[RoomIndex].RoomId] 
+                                                    : new List<Enemies>();
+                // checks if room has enenmies in it.
+                if (currentRoomEnemies.Count > 0)
                 {
-                    Console.WriteLine("There are enenmies");
-                    foreach (var enemy in EnemyList[RoomList[RoomIndex].RoomId])
-                    {
-                        Console.WriteLine($"- {enemy.Name} (HP: {enemy.Health}, ATK: {enemy.Damage})");
-                    }
-
-                    EnemyList[RoomList[RoomIndex].RoomId].Clear();
+                    Console.WriteLine("There are enemies!");
+                    BattleManager battleManager = new BattleManager(player, currentRoomEnemies);
+                    // Start the battle
+                    battleManager.StartBattle();
                 }
-
+                else
+                {
+                    Console.WriteLine("There are no enemies in this room.");
+                }
+                EnemyList[RoomList[RoomIndex].RoomId].Clear();
                 // checks if the room had an item
                 if (RoomList[RoomIndex].Items != null && RoomList[RoomIndex].Items.Count > 0)
                     {
