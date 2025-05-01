@@ -14,6 +14,17 @@ namespace DungeonExplorer
         private Dictionary<int, List<Items>> ItemList;
         public Game()
         {
+            // ===Testing goes here V===
+            /*
+            Console.WriteLine("Test Starting");
+            Testing.CombatTest.AttackTest();
+            Testing.SpawnerCheck.EnemySpawns();
+            Testing.SpawnerCheck.ItemSpawns();
+            Console.WriteLine("Press any key to stop tests.");
+            Console.ReadKey();
+            */
+
+            // ===Game Starts here===
             // Allowes user to pick their own name
             Console.Write("Please enter the name of your hero:  ");
             string username = Console.ReadLine(); 
