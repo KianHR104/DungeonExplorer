@@ -18,7 +18,6 @@ namespace DungeonExplorer
             Console.Clear();
             Game game = new Game();
             game.Start();
-            Console.WriteLine("Waiting for your Implementation");
         }
     }
 }

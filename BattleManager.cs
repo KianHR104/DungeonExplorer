@@ -86,7 +86,6 @@ namespace DungeonExplorer
                         break;
                     default:
                         Console.WriteLine("this shouldnt be happening");
-                        //Debug.LogWarning($"Unknown action '{action}' from enemy.");
                         break;
                 }
                 Console.WriteLine(" ");
