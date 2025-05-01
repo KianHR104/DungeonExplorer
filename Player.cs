@@ -1,12 +1,16 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace DungeonExplorer
 {
     public class Player : Character
     {
+        public List<Items> inventory = new List<Items>();
+
         public Player(string name, int health, int damage) : base(name, health, damage) 
         {
+            inventory = new List<Items>();
         }
 
         /// <summary>
@@ -74,22 +78,25 @@ namespace DungeonExplorer
                 }
             }
         }
-        /// <summary>
-        /// lets player use inventory in combat.
-        /// </summary>
-        public void Inventory()
-        {
-            Console.WriteLine("Inventory");
-        }
         
         /// <summary>
         /// Tell the player they found an item, what it is, and put it in inventory
         /// </summary>
-        public void PickUpItem(List<string> items)
+        public void PickUpItem(List<Items> roomItems)
         {
-            Console.WriteLine("You find an item:");
-            Console.WriteLine(string.Join(", ", items));
-            inventory.AddRange(items);
+            foreach (Items item in roomItems)
+            {
+                inventory.Add(item);
+                Console.WriteLine($"You picked up: {item.Name} - {item.Description}");
+            }
+        }
+        /// <summary>
+        /// Allows you to.... View the invnetory.
+        /// </summary>
+        public void ViewInventory()
+        {
+            // this is using System.Linq;
+            Console.WriteLine($"Inventory: {string.Join(", ", inventory.Select(item => item.Name))}");
         }
     }
 }

@@ -8,7 +8,6 @@ namespace DungeonExplorer
         public string Name { get; private set; }
         public int Health { get; set; }
         public int Damage { get; set; }
-        public List<string> inventory = new List<string>();
         private bool isBlocking = false;
 
         public Character(string name, int health, int damage) 

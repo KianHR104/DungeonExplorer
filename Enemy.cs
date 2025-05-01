@@ -46,7 +46,7 @@ namespace DungeonExplorer
         /// Health: 50
         /// Damage: 10
         /// </summary>
-        public SoulessWarrior() : base("Souless Warrior", 50, 100) {}
+        public SoulessWarrior() : base("Souless Warrior", 50, 10) {}
         // if the enemy didnt block last turn it will block this turn.
         public override string EnemyDecision()
         {

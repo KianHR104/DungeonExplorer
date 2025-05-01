@@ -11,6 +11,7 @@ namespace DungeonExplorer
         private Player player;
         private List<Room> RoomList;
         private Dictionary<int, List<Enemies>> EnemyList;
+        private Dictionary<int, List<Items>> ItemList;
         public Game()
         {
             // Allowes user to pick their own name
@@ -23,6 +24,9 @@ namespace DungeonExplorer
 
             // Creates a list of enemies which relate to each room.
             EnemyList = RoomManager.GetEnemies();
+
+            // Creates a list of enemies which relate to each room.
+            ItemList = RoomManager.GetItems();
 
         }
         /// <summary>
@@ -60,16 +64,26 @@ namespace DungeonExplorer
                 {
                     Console.WriteLine("There are no enemies in this room.");
                 }
+                // Clears the enemies just in case for some bizare reason battle ended without enemies dead.
                 EnemyList[RoomList[RoomIndex].RoomId].Clear();
-                // checks if the room had an item
-                if (RoomList[RoomIndex].Items != null && RoomList[RoomIndex].Items.Count > 0)
-                    {
-                        player.PickUpItem(RoomList[RoomIndex].Items);
-                        // Empties the item incase player reloads this room
-                        RoomList[RoomIndex].Items.Clear();
-                        Thread.Sleep(1000);
-                    }
 
+                // takes just the Items from this room from the diciotrany, if no Items make empty list.
+                List<Items> currentRoomItems = ItemList.ContainsKey(RoomList[RoomIndex].RoomId) 
+                                                    ? ItemList[RoomList[RoomIndex].RoomId] 
+                                                    : new List<Items>();
+                // checks if room has Items in it.
+                if (currentRoomItems.Count > 0)
+                {
+                    Console.WriteLine("There are Items!");
+                    player.PickUpItem(currentRoomItems);
+                }
+                else
+                {
+                    Console.WriteLine("There are no Items in this room.");
+                }
+                // Clears the Items from this room.
+                ItemList[RoomList[RoomIndex].RoomId].Clear();
+                Thread.Sleep(1000);
                 // The options the player has once defeating the enemies and looting the room.
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("1. Look around the room");
@@ -114,7 +128,7 @@ namespace DungeonExplorer
                         Console.WriteLine($"Player Name: {player.Name}");
                         Console.WriteLine($"Player Health: {player.Health}");
                         Console.WriteLine($"Player Damage: {player.Damage}");
-                        Console.WriteLine($"Inventory: {string.Join(", ", player.inventory)}");
+                        player.ViewInventory();
                         Console.WriteLine("Press any key to continue.");
                         Console.ReadKey();
                         break;

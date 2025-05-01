@@ -81,7 +81,7 @@ namespace DungeonExplorer
                         player.Defend();
                         break;
                     case "Inventory":
-                        player.Inventory();
+                        player.ViewInventory();
                         break;
                     default:
                         Console.WriteLine("this shouldnt be happening");

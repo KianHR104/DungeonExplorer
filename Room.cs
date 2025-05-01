@@ -9,16 +9,13 @@ namespace DungeonExplorer
         public int RoomId { get; set; }
         private string Name { get; set; }
         private string Description { get; set; }
-        public List<string> Items { get; set; }
         public Dictionary<string, int> Directions { get; set; }
-        public Room(int id, string name, string description, 
-                    List<string> items,  
+        public Room(int id, string name, string description,  
                     Dictionary<string, int> directions = null)
         {
             RoomId = id;
             Name = name;
             Description = description;
-            Items = items ?? new List<string>(); // Ensures Items is never null
             Directions = directions ?? new Dictionary<string, int>();
         }
 
