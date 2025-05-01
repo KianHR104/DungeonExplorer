@@ -67,7 +67,7 @@ namespace DungeonExplorer
         /// </summary>
         public virtual void Flee(Character target)
         {
-            Console.WriteLine("is fleeing");
+            Console.WriteLine("is attempting to flee.");
         }
 
         /// <summary>

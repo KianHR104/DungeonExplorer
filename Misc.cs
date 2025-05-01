@@ -13,9 +13,9 @@ namespace DungeonExplorer
         /// <summary>
         /// You use the thing and it does nothing
         /// </summary>
-        public override void Use()
+        public override void Use(Player player)
         {
-            Console.WriteLine("Bro its just an item.");
+            Console.WriteLine("You really trying to read lore Rn?");
         }
     }
 
@@ -38,7 +38,7 @@ namespace DungeonExplorer
         /// <summary>
         /// Name: "Residence Key" 
         /// </summary>
-        public ResidenceKey() : base("Residence Key", "The redisence was evil.") {}
+        public ResidenceKey() : base("Residence Key", "The resident was evil.") {}
     }
     public class MysteryKey : Misc
     {

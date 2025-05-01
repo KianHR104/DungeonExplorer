@@ -7,16 +7,18 @@ namespace DungeonExplorer
     {
         public int DamageAmount { get; set; }
 
-        public Weapon(string name, string description, int DamageAmount)
+        public Weapon(string name, string description, int damageAmount)
             : base(name, description, ItemType.Weapon)
         {
+            DamageAmount = damageAmount; 
         }
         /// <summary>
-        /// You use the thing and it hurt enemy
+        /// You use the weapon and it equips it.
         /// </summary>
-        public override void Use()
+        public override void Use(Player player)
         {
-            Console.WriteLine($"you use {Name}, hurt enemy for {DamageAmount} damage");
+            player.Damage = DamageAmount;
+            Console.WriteLine($"you equipped {Name}, now you deal {DamageAmount} damage.");
         }
     }
 

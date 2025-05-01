@@ -18,7 +18,7 @@ namespace DungeonExplorer
             Type = type;
         }
 
-        public virtual void Use()
+        public virtual void Use(Player player)
         {
             Console.WriteLine($"use {Name} it did something probably.");
         }

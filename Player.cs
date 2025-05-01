@@ -98,5 +98,52 @@ namespace DungeonExplorer
             // this is using System.Linq;
             Console.WriteLine($"Inventory: {string.Join(", ", inventory.Select(item => item.Name))}");
         }
+
+        /// <summary>
+        /// Allows you to View the invnetory however they are displayed by item type.
+        /// </summary>
+        public void DisplayItemsByType()
+        {
+            // LINQ - group iventory by the item type
+            var SortedItems = inventory.GroupBy(item => item.Type);
+            // goes through every group
+            foreach (var group in SortedItems)
+            {
+                Console.WriteLine($"Items of type: {group.Key}");
+                // goess through every item in those groups
+                foreach (var item in group)
+                {
+                    Console.WriteLine($"- {item.Name}");
+                }
+            }
+        }
+        /// <summary>
+        /// Allows the user to pick an item and use it
+        /// </summary>
+        public void PickItem()
+        {
+            while (true)
+            {
+                Console.WriteLine("What item you want to use?   ");
+                // gets ipout from user.
+                string input = Console.ReadLine();
+                // looks for the input in the inventroy
+                var selectedItem = inventory.FirstOrDefault(item => 
+                    item.Name.Equals(input, StringComparison.OrdinalIgnoreCase));
+
+                if (selectedItem != null)
+                {
+                    Console.WriteLine($"You picked: {selectedItem.Name}");
+                    // use the item
+                    selectedItem.Use(this);
+                    break;
+                }
+                // force the user to input correct answer.
+                else
+                {
+                    Console.WriteLine("please enter a actual item");
+                }
+            }
+        }
     }
 }

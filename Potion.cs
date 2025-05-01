@@ -7,16 +7,20 @@ namespace DungeonExplorer
     {
         public int HealAmount { get; set; }
 
-        public Potion(string name, string description, int HealAmount)
+        public Potion(string name, string description, int healAmount)
             : base(name, description, ItemType.Potion)
         {
+            HealAmount = healAmount;
         }
         /// <summary>
         /// You use the thing and it heals you.
         /// </summary>
-        public override void Use()
+        public override void Use(Player player)
         {
+            player.Health += HealAmount;
             Console.WriteLine($"drank {Name} and heal {HealAmount} HP");
+            player.inventory.Remove(this);
+            Console.WriteLine($"{Name} has been consumed.");
         }
     }
     public class BottleOfFire : Potion
